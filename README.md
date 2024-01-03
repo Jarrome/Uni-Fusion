@@ -1,8 +1,8 @@
 # [Uni-Fusion: Universal Continuous Mapping](https://jarrome.github.io/Uni-Fusion/)
 
-[Yijun Yuan](https://jarrome.github.io/), [Andreas Nüchter]([https://www.informatik.uni-wuerzburg.de/space/mitarbeiter/nuechter/](https://www.informatik.uni-wuerzburg.de/robotics/team/nuechter/))
+[Yijun Yuan](https://jarrome.github.io/), [Andreas Nüchter]([https://www.informatik.uni-wuerzburg.de/space/mitarbeiter/nuechter/](https://www.informatik.uni-wuerzburg.de/robotics/team/nuechter/)
 
-[Preprint]([http://arxiv.org/abs/2305.00282](https://arxiv.org/abs/2303.12678)) |  [website](https://jarrome.github.io/Uni-Fusion/)
+[Preprint]([http://arxiv.org/abs/2305.00282](https://arxiv.org/abs/2303.12678) |  [website](https://jarrome.github.io/Uni-Fusion/)
 
 
 ## TODO:
