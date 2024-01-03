@@ -6,6 +6,7 @@
 
 
 ## TODO:
-* Upload the env script and uni-encoder src (Jan.3)
+* Upload the uni-encoder src (Jan.3)
+* Upload the env script (Jan.4)
 * Upload the recon. application (By Jan.8)
 * Upload the seman. application (By Jan.12)
