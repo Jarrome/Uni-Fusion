@@ -7,7 +7,7 @@ import torch
 from collections import defaultdict, namedtuple
 
 from threading import Thread, Lock
-from dataset.production import *
+from uni.dataset import *
 from utils import motion_util
 from pyquaternion import Quaternion
 
@@ -202,18 +202,18 @@ class ReplicaRGBDDataset(object):
     cam = namedtuple('camera', 'fx fy cx cy scale')(
             600., 600., 599.5, 339.5, 6553.5)
 
-    def __init__(self, path, start_frame: int = 0, end_frame: int = -1, first_tq: list = None, load_gt: bool = False, register=True, mesh_gt: str = None):
+    def __init__(self, path, start_frame: int = 0, end_frame: int = -1, first_tq: list = None, load_gt: bool = False, register=True, mesh_gt: str = None,  **kwargs):
         path = os.path.expanduser(path)
 
         self.first_iso = motion_util.Isometry(q=Quaternion(array=[0.0, -1.0, 0.0, 0.0]))
 
 
         if not register:
-            rgb_ids, rgb_timestamps = self.listdir(path, 'rgb', ext='.jpg')
-            depth_ids, depth_timestamps = self.listdir(path, 'depth')
+            rgb_ids, rgb_timestamps = self.listdir(path, '', ext='.jpg')
+            depth_ids, depth_timestamps = self.listdir(path, '')
         else:
-            rgb_imgs, rgb_timestamps = self.listdir(path, 'rgb', ext='.jpg')
-            depth_imgs, depth_timestamps = self.listdir(path, 'depth')
+            rgb_imgs, rgb_timestamps = self.listdir(path, '', ext='.jpg')
+            depth_imgs, depth_timestamps = self.listdir(path, '')
             
             interval = (rgb_timestamps[1:] - rgb_timestamps[:-1]).mean() * 2/3
             matrix = np.abs(rgb_timestamps[:, np.newaxis] - depth_timestamps)

@@ -1,15 +1,15 @@
-import os
+import os, sys
 import torch
 import logging
 import numpy as np
 import argparse
 import threading
 import open3d as o3d
-import network.utility as net_util
 
 p_dir = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(p_dir)
 
+import encoder.utility as net_util
 import ext
 from .base_map import BaseMap
 import numba

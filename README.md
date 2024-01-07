@@ -19,18 +19,33 @@
 conda create -n uni python=3.8
 conda activate uni
 
-conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=11.3 -c pytorch
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
 pip install pyg-lib torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.12.0+cu113.html
-pip install ninja functorch numba open3d opencv-python trimesh
+pip install ninja functorch==0.2.1 numba open3d opencv-python trimesh
 ```
 
 * install package
 ```
 # install uni package
 python setup.py install
-# install cuda function, this may take several minutes
+# install cuda function, this may take several minutes, please use `top` or `ps` to check
 python uni/ext/__init__.py
 ```
 
+* build uni encoder in 1 second
+```
+python uni/encoder/uni_encoder_v2.py
+```
+
 ## 1. Reconstruction Demo
+
+* download replica data
+```
+source scripts/download_replica.sh
+```
+
+* run demo
+```
+python demo.py configs/replica/office0.yaml
+```
 
