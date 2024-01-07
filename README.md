@@ -14,7 +14,7 @@
 * Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
 
 ## 0. Env setting and install
-Create the conda env
+* Create env
 ```
 conda create -n uni python=3.8
 conda activate uni
@@ -22,6 +22,11 @@ conda activate uni
 conda install pytorch==1.12.0 torchvision==0.13.0 torchaudio==0.12.0 cudatoolkit=11.3 -c pytorch
 pip install pyg-lib torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.12.0+cu113.html
 pip install ninja functorch numba open3d opencv-python trimesh
+```
+
+* install package
+```
+python setup.py install
 ```
 
 ## 1. Reconstruction Demo
