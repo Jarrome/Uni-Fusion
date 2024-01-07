@@ -10,6 +10,7 @@
 - [x] Upload the env script (Jan.4)
 - [x] Upload the recon. application (By Jan.8)
 - [ ] Upload the seman. application (By Jan.12)
+- [ ] Toy example for fast essembling Uni-Fusion into custom project
 - [ ] Upload the used ORB-SLAM2 support
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
 
@@ -49,3 +50,19 @@ source scripts/download_replica.sh
 python demo.py configs/replica/office0.yaml
 ```
 
+## Citation
+If you find this work interesting, please cite us:
+```bibtex
+@article{yuan2024uni,
+  title={Uni-Fusion: Universal Continuous Mapping},
+  author={Yuan, Yijun and N{\"u}chter, Andreas},
+  journal={IEEE Transactions on Robotics},
+  year={2024},
+  publisher={IEEE}
+}
+```
+
+## Acknowledgement
+* This implementation is on top of [DI-Fusion](https://github.com/huangjh-pub/di-fusion).
+* We also borrow some dataset code from [NICE-SLAM](https://github.com/cvg/nice-slam).
+* We got detailed response of questions from [BNV-Fusion](https://github.com/likojack/bnv_fusion).
