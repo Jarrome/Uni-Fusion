@@ -8,7 +8,7 @@
 ## TODO:
 - [x] Upload the uni-encoder src (Jan.3)
 - [x] Upload the env script (Jan.4)
-- [ ] Upload the recon. application (By Jan.8)
+- [x] Upload the recon. application (By Jan.8)
 - [ ] Upload the seman. application (By Jan.12)
 - [ ] Upload the used ORB-SLAM2 support
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
