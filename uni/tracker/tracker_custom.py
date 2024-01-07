@@ -3,11 +3,11 @@ import copy
 
 import torch
 import numpy as np
-from system.ext import unproject_depth, remove_radius_outlier, estimate_normals, rgb_odometry, gradient_xy
+from uni.ext import unproject_depth, remove_radius_outlier, estimate_normals, rgb_odometry, gradient_xy
 
-from dataset.production import FrameIntrinsic
-from utils import exp_util
-from utils.motion_util import Isometry
+from uni.dataset import FrameIntrinsic
+from uni.utils import exp_util
+from uni.utils.motion_util import Isometry
 from pyquaternion import Quaternion
 import logging
 
@@ -17,10 +17,8 @@ import matplotlib.pyplot as plt
 import trimesh
 from time import time
 
-from system.cicp import cicp
+from .cicp import cicp
 
-
-#from utils.ifr.ifr import IFR
 
 import pdb
 
