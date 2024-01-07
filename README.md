@@ -65,4 +65,4 @@ If you find this work interesting, please cite us:
 ## Acknowledgement
 * This implementation is on top of [DI-Fusion](https://github.com/huangjh-pub/di-fusion).
 * We also borrow some dataset code from [NICE-SLAM](https://github.com/cvg/nice-slam).
-* We got detailed response of questions from [BNV-Fusion](https://github.com/likojack/bnv_fusion).
+* We thank the detailed response of questions from Kejie Li, Björn Michele and Songyou Peng.
