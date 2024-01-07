@@ -26,7 +26,10 @@ pip install ninja functorch numba open3d opencv-python trimesh
 
 * install package
 ```
+# install uni package
 python setup.py install
+# install cuda function, this may take several minutes
+python uni/ext/__init__.py
 ```
 
 ## 1. Reconstruction Demo
