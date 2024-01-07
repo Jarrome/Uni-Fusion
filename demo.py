@@ -322,7 +322,6 @@ if __name__ == '__main__':
     else:
         args.sequence_kwargs['slam'] = args.slam
 
-    pdb.set_trace()
     vis_param.sequence = sequence_module(**args.sequence_kwargs)
 
     # Mapping
