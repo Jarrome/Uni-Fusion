@@ -9,9 +9,10 @@
 - [x] Upload the uni-encoder src (Jan.3)
 - [x] Upload the env script (Jan.4)
 - [x] Upload the recon. application (By Jan.8)
+- [x] Upload the used ORB-SLAM2 support (Jan.8)
+- [x] Upload the azure process for RGB,D,IR (Jan.8)
 - [ ] Upload the seman. application (By Jan.12)
 - [ ] Toy example for fast essembling Uni-Fusion into custom project
-- [ ] Upload the used ORB-SLAM2 support
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
 
 ## 0. Env setting and install
@@ -27,28 +28,49 @@ pip install ninja functorch==0.2.1 numba open3d opencv-python trimesh
 
 * install package
 ```
+git clone https://github.com/Jarrome/Uni-Fusion.git && cd Uni-Fusion
 # install uni package
 python setup.py install
 # install cuda function, this may take several minutes, please use `top` or `ps` to check
 python uni/ext/__init__.py
 ```
 
-* build uni encoder in 1 second
+* train a uni encoder from nothing in 1 second
 ```
 python uni/encoder/uni_encoder_v2.py
 ```
 
+* optionally, you can install the [ORB-SLAM2](https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2) that we use for tracking
+```
+mkdir ./external && cd external
+git clone https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2
+cd [this_folder]
+# this_folder is the absolute path for the orbslam2
+# Add ORB_SLAM2/lib to PYTHONPATH and LD_LIBRARY_PATH environment variables
+# I suggest putting this in ~/.bashrc
+export PYTHONPATH=$PYTHONPATH:[this_folder]/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:[this_folder]/lib
+
+./build.sh && ./build_python.sh
+```
+
+
 ## 1. Reconstruction Demo
 
-* download replica data
+### download replica data
 ```
 source scripts/download_replica.sh
 ```
 
-* run demo
+### run demo
 ```
 python demo.py configs/replica/office0.yaml
 ```
+---
+#### Azure capturing
+We provide the script to extract RGB, D and IR from azure.mp4: [azure_process](https://github.com/Jarrome/azure_process)
+---
+
 
 ## Citation
 If you find this work interesting, please cite us:
@@ -65,4 +87,4 @@ If you find this work interesting, please cite us:
 ## Acknowledgement
 * This implementation is on top of [DI-Fusion](https://github.com/huangjh-pub/di-fusion).
 * We also borrow some dataset code from [NICE-SLAM](https://github.com/cvg/nice-slam).
-* We thank the detailed response of questions from Kejie Li, Björn Michele and Songyou Peng.
+* We thank the detailed response of questions from Kejie Li, Björn Michele, Songyou Peng and Golnaz Ghiasi.
