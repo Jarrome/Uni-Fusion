@@ -12,6 +12,7 @@
 - [x] Upload the used ORB-SLAM2 support (Jan.8)
 - [x] Upload the azure process for RGB,D,IR (Jan.8)
 - [ ] Upload the seman. application (By Jan.12)
+- [ ] Upload the Custom context demo (By Jan.14)
 - [ ] Toy example for fast essembling Uni-Fusion into custom project
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
 
@@ -66,9 +67,15 @@ source scripts/download_replica.sh
 ```
 python demo.py configs/replica/office0.yaml
 ```
----
-#### Azure capturing
+
+## 2. Custom context Demo
+
+## 3. Semantic Demo
+
+## 4. Self-captured data
+### Azure capturing
 We provide the script to extract RGB, D and IR from azure.mp4: [azure_process](https://github.com/Jarrome/azure_process)
+
 ---
 
 
