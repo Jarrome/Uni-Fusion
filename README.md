@@ -11,10 +11,12 @@
 - [x] Upload the recon. application (By Jan.8)
 - [x] Upload the used ORB-SLAM2 support (Jan.8)
 - [x] Upload the azure process for RGB,D,IR (Jan.8)
-- [ ] Upload the seman. application (By Jan.12)
-- [ ] Upload the Custom context demo (By Jan.14)
+- [ ] Upload the seman. application (By Jan.14)
+- [ ] Upload the Custom context demo (By Jan.16)
 - [ ] Toy example for fast essembling Uni-Fusion into custom project
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
+
+Because my annual PhD. meeting is on Jan.12, I have to prepare it, the TODO deadline will be postponed for 2 days.  
 
 ## 0. Env setting and install
 * Create env
@@ -41,7 +43,10 @@ python uni/ext/__init__.py
 python uni/encoder/uni_encoder_v2.py
 ```
 
-* optionally, you can install the [ORB-SLAM2](https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2) that we use for tracking
+
+<details>
+<summary> optionally, you can install the [ORB-SLAM2](https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2) that we use for tracking</summary>
+  
 ```
 mkdir ./external && cd external
 git clone https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2
@@ -54,7 +59,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:[this_folder]/lib
 
 ./build.sh && ./build_python.sh
 ```
-
+</details>
 
 ## 1. Reconstruction Demo
 
