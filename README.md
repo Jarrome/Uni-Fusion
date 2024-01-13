@@ -6,10 +6,16 @@
 
 <p align="">
       <img src="assets/encoder.png" align="" width="45%">
-      <img src="assets/PLV.png" align="riht" width="37%">
+      <img src="assets/PLV.png" align="" width="37%">
 </p>
 
 *Universal encoder **no need data train** | Voxel grid for mapping*
+
+*Therefore, it supports **any mapping**:*
+
+<p align="">
+<img src="assets/cover_2.png" align="" width="50%">
+</p>
 
 ## TODO:
 - [x] Upload the uni-encoder src (Jan.3)
