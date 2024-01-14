@@ -17,19 +17,28 @@
 <img src="assets/cover_2.png" align="" width="50%">
 </p>
 
-<details>
-<summary> TODO:</summary>
-- [x] Upload the uni-encoder src (Jan.3)
-- [x] Upload the env script (Jan.4)
-- [x] Upload the recon. application (By Jan.8)
-- [x] Upload the used ORB-SLAM2 support (Jan.8)
-- [x] Upload the azure process for RGB,D,IR (Jan.8)
-- [x] Upload the seman. application (Jan.14)
-- [x] Upload the Custom context demo (Jan.14)
-- [ ] Toy example for fast essembling Uni-Fusion into custom project
-- [ ] Extraction from Latent Implicit Maps (LIMs)
-- [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
+<!-- TABLE OF CONTENTS -->
+<details open="open" style='padding: 10px; border-radius:5px 30px 30px 5px; border-style: solid; border-width: 1px;'>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#env-setting-and-install">Installation</a>
+    </li>
+    <li>
+      <a href="#demo">Demo</a>
+    </li>
+    <li>
+      <a href="#todo">TODO</a>
+    </li>
+    <li>
+      <a href="#citation">Citation</a>
+    </li>
+    <li>
+      <a href="#acknowledgement">Acknowledgement</a>
+    </li>
+  </ol>
 </details>
+
 
 ## Env setting and install
 * Create env
@@ -89,15 +98,17 @@ python demo.py configs/replica/office0.yaml
 # with slam
 python demo.py configs/replica/office0_w_slam.yaml
 ```
-*in [scene_w_slam.yaml], we can choose 3 mode*
+* *in [scene_w_slam.yaml], we can choose 3 mode*
+
 |Usage| load_gt| slam|
 |---|---|---|
 |use SLAM track|False|True|
 |use SLAM pred pose|True|True|
 |use GT pose|True|False|
 
-*you can set ```vis=True``` for online vis (```False``` by default), which is more Di-Fusion. You can tap keyboard ',' for step and '.' for continue running with GUI*
-*We will later provide a LIM_extraction given result LIMs*
+* *you can set ```vis=True``` for online vis (```False``` by default), which is more Di-Fusion. You can tap keyboard ',' for step and '.' for continue running with GUI*
+
+* *We will later provide a LIM_extraction given result LIMs*
 
 
 ### 2. Custom context Demo
@@ -118,6 +129,7 @@ python demo.py configs/replica/office0_custom.yaml
 ```
 
 ### 3. Open Vocabulary Scene Understanding Demo
+This Text-Visual CLIP is from [OpenSeg](https://github.com/tensorflow/tpu/tree/641c1ac6e26ed788327b973582cbfa297d7d31e7/models/official/detection/projects/openseg)
 ```
 # install requirements
 pip install tensorflow
@@ -134,8 +146,19 @@ python demo.py configs/replica/office0_w_clip.yaml
 We provide the script to extract RGB, D and IR from azure.mp4: [azure_process](https://github.com/Jarrome/azure_process)
 
 ---
+## TODO:
+- [x] Upload the uni-encoder src (Jan.3)
+- [x] Upload the env script (Jan.4)
+- [x] Upload the recon. application (By Jan.8)
+- [x] Upload the used ORB-SLAM2 support (Jan.8)
+- [x] Upload the azure process for RGB,D,IR (Jan.8)
+- [x] Upload the seman. application (Jan.14)
+- [x] Upload the Custom context demo (Jan.14)
+- [ ] Toy example for fast essembling Uni-Fusion into custom project
+- [ ] Extraction from Latent Implicit Maps (LIMs)
+- [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
 
-
+---
 ## Citation
 If you find this work interesting, please cite us:
 ```bibtex
