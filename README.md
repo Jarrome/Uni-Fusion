@@ -27,7 +27,7 @@
 - [x] Upload the seman. application (Jan.14)
 - [x] Upload the Custom context demo (Jan.14)
 - [ ] Toy example for fast essembling Uni-Fusion into custom project
-- [ ] Add visualization
+- [ ] Extraction from Latent Implicit Maps (LIMs)
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
 </details>
 
@@ -78,7 +78,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:[this_folder]/lib
 
 All demo can be run with ```python demo.py [config]```
 
-## 1. Reconstruction Demo 
+### 1. Reconstruction Demo 
 ```
 # download replica data
 source scripts/download_replica.sh
@@ -89,8 +89,18 @@ python demo.py configs/replica/office0.yaml
 # with slam
 python demo.py configs/replica/office0_w_slam.yaml
 ```
+*in [scene_w_slam.yaml], we can choose 3 mode*
+|Usage| load_gt| slam|
+|---|---|---|
+|use SLAM track|False|True|
+|use SLAM pred pose|True|True|
+|use GT pose|True|False|
 
-## 2. Custom context Demo
+*you can set ```vis=True``` for online vis (```False``` by default), which is more Di-Fusion. You can tap keyboard ',' for step and '.' for continue running with GUI*
+*We will later provide a LIM_extraction given result LIMs*
+
+
+### 2. Custom context Demo
 
 [```office0_custom.yaml```](https://github.com/Jarrome/Uni-Fusion/blob/main/configs/replica/office0_custom.yaml) contains all mapping you need
 
@@ -107,7 +117,7 @@ bash models/download_model.sh
 python demo.py configs/replica/office0_custom.yaml
 ```
 
-## 3. Open Vocabulary Scene Understanding Demo
+### 3. Open Vocabulary Scene Understanding Demo
 ```
 # install requirements
 pip install tensorflow
@@ -119,8 +129,8 @@ gsutil cp -r gs://cloud-tpu-checkpoints/detection/projects/openseg/colab/exporte
 python demo.py configs/replica/office0_w_clip.yaml
 ```
 
-## 4. Self-captured data
-### Azure capturing
+### 4. Self-captured data
+#### Azure capturing
 We provide the script to extract RGB, D and IR from azure.mp4: [azure_process](https://github.com/Jarrome/azure_process)
 
 ---
