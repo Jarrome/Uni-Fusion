@@ -23,9 +23,10 @@
 - [x] Upload the recon. application (By Jan.8)
 - [x] Upload the used ORB-SLAM2 support (Jan.8)
 - [x] Upload the azure process for RGB,D,IR (Jan.8)
-- [ ] Upload the seman. application (By Jan.14)
-- [ ] Upload the Custom context demo (By Jan.16)
+- [x] Upload the seman. application (Jan.14)
+- [x] Upload the Custom context demo (Jan.14)
 - [ ] Toy example for fast essembling Uni-Fusion into custom project
+- [ ] Add visualization
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
 
 Because my annual PhD. meeting is on Jan.12, I have to prepare it, the TODO deadline will be postponed for 2 days.  
@@ -82,7 +83,11 @@ source scripts/download_replica.sh
 
 ### run demo
 ```
+# with gt pose
 python demo.py configs/replica/office0.yaml
+
+# with slam
+python demo.py configs/replica/office0_w_slam.yaml
 ```
 
 ## 2. Custom context Demo
@@ -96,7 +101,7 @@ pip install git+https://github.com/openai/CLIP.git
 # download openseg ckpt
 gsutil cp -r gs://cloud-tpu-checkpoints/detection/projects/openseg/colab/exported_model ./external/openseg/
 
-
+python demo.py configs/replica/office0_w_clip.yaml
 ```
 
 ## 4. Self-captured data
