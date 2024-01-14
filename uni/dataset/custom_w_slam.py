@@ -46,8 +46,8 @@ def read_orbslam2_file(traj_file):
 
 class SLAM():
     def __init__(self, 
-            vocab_file= './thirdparts/orb_slam2/Vocabulary/ORBvoc.bin',
-            setting_file = './thirdparts/orb_slam2/Examples/RGB-D/azure_office.yaml',
+            vocab_file= './external/Uni-Fusion-use-ORB-SLAM2/Vocabulary/ORBvoc.bin',
+            setting_file = './external/Uni-Fusion-use-ORB-SLAM2/Examples/RGB-D/azure_office.yaml',
             mode = 'rgbd',
             init_pose = np.eye(4,dtype=np.float32),
             use_viewer = False):
@@ -75,62 +75,6 @@ class SLAM():
 
 
 
-class TUMwSLAM(TUMRGBDDataset):
-    def __init__(self, path, start_frame: int = 0, end_frame: int = -1, first_tq: list = None, load_gt: bool = False, train=True, mesh_gt = None,style_idx=1, has_style=True, has_ir=False, has_saliency=True, has_latent=False, f_im=None):
-        load_file_gt = False
-        super().__init__(path, start_frame, end_frame, first_tq, load_file_gt, train, mesh_gt)
-
-        self.slam = SLAM(setting_file='/home/yijun/tools/orb_slam2/Examples/RGB-D/TUM3.yaml')
-        self.slam.feed_stack_and_start_thread(self.rgb, self.depth)
-
-        self.first_iso = motion_util.Isometry(q=Quaternion(array=[0.0, -1.0, 0.0, 0.0]))
-        self.change_iso = None
-
-    def orbslam2pose_to_LIMpose(self, pose):
-        try:
-            cur_iso = motion_util.Isometry(q=Quaternion(matrix=pose[:3,:3], atol=1e-5, rtol=1e-5), t=pose[:3,3])
-        except Exception as e:
-            print(pose, e)
-            return None
-        if self.change_iso is None:
-            self.change_iso = self.first_iso.dot(cur_iso.inv())
-            self.T_gt2uni = self.change_iso.matrix
-        return self.change_iso.dot(cur_iso)
-    def __getitem__(self, idx):
-        frame_data = FrameData()
-        while idx >= len(self.slam.poses):
-            sleep(.1)
-
-        frame_data.gt_pose = self.orbslam2pose_to_LIMpose(self.slam.poses[idx])
-        while frame_data.gt_pose is None:
-            idx += 1
-            frame_data.gt_pose = self.orbslam2pose_to_LIMpose(self.slam.poses[idx])
-        K = np.eye(3)
-        '''
-        K[0,0], K[1,1], K[0,2], K[1,2] = 517.306408, 516.469215, 516.469215, 255.313989
-        dist = np.array([0.262383, -0.953104, -0.005358, 0.002628, 1.163314])
-        frame_data.calib = FrameIntrinsic(517.306408, 516.469215, 516.469215, 255.313989, 5000)
-        '''
-        '''
-        K[0,0], K[1,1], K[0,2], K[1,2] = 520.9 , 521.0 ,  325.1 ,  249.7
-        dist = np.array([0.2312, -0.7849, -0.0033, -0.0001, 0.9172])
-        frame_data.calib = FrameIntrinsic(520.9,  521.0,   325.1,   249.7, 5000)
-        '''
-        K[0,0], K[1,1], K[0,2], K[1,2] = 535.4,  539.2,   320.1,   247.6
-        dist = np.zeros(5)
-        frame_data.calib = FrameIntrinsic(535.4,  539.2,   320.1,   247.6, 5000)
-
-
-
-        frame_data.depth =  torch.from_numpy(self.depth[idx].astype(np.float32)).cuda().float() / 5000
-        # only undistort rgb
-        rgb = cv2.undistort(self.rgb[idx], K, dist)
-        frame_data.rgb = torch.from_numpy(rgb).cuda().float() / 255.
-        frame_data.customs = [None]*4#frame_data.ir, frame_data.saliency, frame_data.style, frame_data.latent]
-
-        return frame_data
-
-       
  
 class CustomAzurewSLAM(AzureRGBDIDataset):
     def __init__(self, path, start_frame: int = 0, end_frame: int = -1, first_tq: list = None, load_gt: bool = False, train=True, mesh_gt = None, style_idx=1, has_style=True, has_ir=False, has_saliency=True, has_latent=False, f_im=None, slam=False):
@@ -192,7 +136,12 @@ class CustomAzurewSLAM(AzureRGBDIDataset):
             frame_data.gt_pose = self.orbslam2pose_to_LIMpose(self.slam.poses[idx])
             '''
         else:
-            frame_data.gt_pose = self.gt_trajectory[idx]
+            if self.gt_trajectory is not None:
+                frame_data.gt_pose = self.gt_trajectory[idx]
+            else:
+                frame_data.gt_pose = None
+
+
         frame_data.calib = FrameIntrinsic(self.cam.fx, self.cam.fy, self.cam.cx, self.cam.cy, self.cam.scale)
         frame_data.depth =  torch.from_numpy(self.depth[idx].astype(np.float32)).cuda(0).float() / self.cam.scale
         frame_data.rgb = torch.from_numpy(self.rgb[idx]).cuda(0).float() / 255.
@@ -221,7 +170,7 @@ class CustomReplicawSLAM(ReplicaRGBDDataset):
         load_file_gt = False
         super().__init__(path, start_frame, end_frame, first_tq, load_file_gt, train, mesh_gt)
         if slam:
-            self.slam = SLAM(setting_file='./thirdparts/orb_slam2/Examples/RGB-D/replica.yaml')
+            self.slam = SLAM(setting_file='./external/Uni-Fusion-use-ORB-SLAM2/Examples/RGB-D/replica.yaml')
             if not load_gt:
                 self.slam.feed_stack_and_start_thread(self.rgb, self.depth)
             else:
@@ -293,7 +242,12 @@ class CustomReplicawSLAM(ReplicaRGBDDataset):
 
             frame_data.gt_pose = self.orbslam2pose_to_LIMpose(self.slam.poses[idx])
         else:
-            assert False, "wait for add this code"
+            if self.gt_trajectory is not None:
+                frame_data.gt_pose = self.gt_trajectory[idx]
+            else:
+                frame_data.gt_pose = None
+
+
 
         frame_data.calib = FrameIntrinsic(600., 600., 599.5, 339.5, 6553.5)
         frame_data.depth =  torch.from_numpy(self.depth[idx].astype(np.float32)).cuda(0).float() / 6553.5
@@ -324,7 +278,7 @@ class CustomScanNetwSLAM(ScanNetRGBDDataset):
     def __init__(self, path, start_frame: int = 0, end_frame: int = -1, first_tq: list = None, load_gt: bool = False, train=True, mesh_gt = None, style_idx=1, has_style=True, has_ir=False, has_saliency=True, has_latent=False, f_im=None, slam=False):
         super().__init__(path, start_frame, end_frame, first_tq, load_gt, train, mesh_gt)
         if slam:
-            self.slam = SLAM(setting_file='./thirdparts/orb_slam2/Examples/RGB-D/scannet.yaml')
+            self.slam = SLAM(setting_file='./external/Uni-Fusion-use-ORB-SLAM2/Examples/RGB-D/scannet.yaml')
             if not load_gt:
                 self.slam.feed_stack_and_start_thread(self.rgb, self.depth)
             else:

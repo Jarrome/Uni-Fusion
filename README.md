@@ -54,7 +54,7 @@ python uni/encoder/uni_encoder_v2.py
 <summary> optionally, you can install the [ORB-SLAM2](https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2) that we use for tracking</summary>
   
 ```
-mkdir ./external && cd external
+cd external
 git clone https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2
 cd [this_folder]
 # this_folder is the absolute path for the orbslam2
@@ -82,6 +82,16 @@ python demo.py configs/replica/office0.yaml
 ## 2. Custom context Demo
 
 ## 3. Semantic Demo
+```
+# install requirements
+pip install tensorflow
+pip install git+https://github.com/openai/CLIP.git
+
+# download openseg ckpt
+gsutil cp -r gs://cloud-tpu-checkpoints/detection/projects/openseg/colab/exported_model ./external/openseg/
+
+
+```
 
 ## 4. Self-captured data
 ### Azure capturing

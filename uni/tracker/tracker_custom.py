@@ -24,7 +24,7 @@ import pdb
 
 
 def point_box_filter(points: torch.Tensor, normals: torch.Tensor, voxel_size: float):
-    from utils import torch_scatter
+    from uni.utils import torch_scatter
     min_bound = torch.min(points, dim=0, keepdim=True).values - voxel_size * 0.5
     max_bound = torch.max(points, dim=0, keepdim=True).values + voxel_size * 0.5
     ref_coord = torch.floor((points - min_bound) / voxel_size).long()
@@ -36,7 +36,7 @@ def point_box_filter(points: torch.Tensor, normals: torch.Tensor, voxel_size: fl
     return filtered_pc, filtered_normal
 
 def point_box_filter_w_color(points: torch.Tensor, normals: torch.Tensor, colors: torch.Tensor, voxel_size: float):
-    from utils import torch_scatter
+    from uni.utils import torch_scatter
 
     min_bound = torch.min(points, dim=0, keepdim=True).values - voxel_size * 0.5
     max_bound = torch.max(points, dim=0, keepdim=True).values + voxel_size * 0.5
@@ -49,7 +49,7 @@ def point_box_filter_w_color(points: torch.Tensor, normals: torch.Tensor, colors
     filtered_color = torch_scatter.scatter_mean(colors, inv_inds, dim=0)
     return filtered_pc, filtered_normal, filtered_color
 def point_box_filter_w_latent(points: torch.Tensor, normals: torch.Tensor, latents: torch.Tensor, voxel_size: float):
-    from utils import torch_scatter
+    from uni.utils import torch_scatter
 
     min_bound = torch.min(points, dim=0, keepdim=True).values - voxel_size * 0.5
     max_bound = torch.max(points, dim=0, keepdim=True).values + voxel_size * 0.5
@@ -65,7 +65,7 @@ def point_box_filter_w_latent(points: torch.Tensor, normals: torch.Tensor, laten
 
 
 def point_box_filter_w_customs(points, normals, customs, voxel_size: float):
-    from utils import torch_scatter
+    from uni.utils import torch_scatter
 
     min_bound = torch.min(points, dim=0, keepdim=True).values - voxel_size * 0.5
     max_bound = torch.max(points, dim=0, keepdim=True).values + voxel_size * 0.5
