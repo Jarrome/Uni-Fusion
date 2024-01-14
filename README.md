@@ -17,7 +17,8 @@
 <img src="assets/cover_2.png" align="" width="50%">
 </p>
 
-## TODO:
+<details>
+<summary> TODO:</summary>
 - [x] Upload the uni-encoder src (Jan.3)
 - [x] Upload the env script (Jan.4)
 - [x] Upload the recon. application (By Jan.8)
@@ -28,10 +29,9 @@
 - [ ] Toy example for fast essembling Uni-Fusion into custom project
 - [ ] Add visualization
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
+</details>
 
-Because my annual PhD. meeting is on Jan.12, I have to prepare it, the TODO deadline will be postponed for 2 days.  
-
-## 0. Env setting and install
+## Env setting and install
 * Create env
 ```
 conda create -n uni python=3.8
@@ -74,15 +74,15 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:[this_folder]/lib
 ```
 </details>
 
-## 1. Reconstruction Demo
+## Demo
 
-### download replica data
+All demo can be run with ```python demo.py [config]```
+
+## 1. Reconstruction Demo 
 ```
+# download replica data
 source scripts/download_replica.sh
-```
 
-### run demo
-```
 # with gt pose
 python demo.py configs/replica/office0.yaml
 
@@ -92,7 +92,22 @@ python demo.py configs/replica/office0_w_slam.yaml
 
 ## 2. Custom context Demo
 
-## 3. Semantic Demo
+[```office0_custom.yaml```](https://github.com/Jarrome/Uni-Fusion/blob/main/configs/replica/office0_custom.yaml) contains all mapping you need
+
+```
+# if you need saliency
+pip install transparent-background
+# if you need style
+cd external
+git clone https://github.com/Jarrome/PyTorch-Multi-Style-Transfer.git
+cd PyTorch-Style-Transfer/experiments
+bash models/download_model.sh
+
+# run demo
+python demo.py configs/replica/office0_custom.yaml
+```
+
+## 3. Open Vocabulary Scene Understanding Demo
 ```
 # install requirements
 pip install tensorflow
