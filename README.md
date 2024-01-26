@@ -4,6 +4,9 @@
 
 [Preprint](https://arxiv.org/abs/2303.12678) |  [website](https://jarrome.github.io/Uni-Fusion/)
 
+#### Uni-Fusion is   *<ins>nothing to do with NeRF!</ins>*  
+#### It is a Fusion method (only forward and fusion)!
+
 <p align="">
       <img src="assets/encoder.png" align="" width="45%">
       <img src="assets/PLV.png" align="" width="37%">
