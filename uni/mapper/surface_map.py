@@ -399,7 +399,7 @@ class SurfaceMap(BaseMap):
 
                 if interpolate:
 
-                    vertices, vertices_flatten_id, vertices_std = system.ext.marching_cubes_interp(
+                    vertices, vertices_flatten_id, vertices_std = ext.marching_cubes_interp(
                         self.indexer.view(self.n_xyz), 
                         focused_flatten_id, vec_id_batch_mapping,
                         high_sdf, high_std, max_n_triangles, self.n_xyz, max_std)  # (T, 3, 3), (T, ), (T, 3)
