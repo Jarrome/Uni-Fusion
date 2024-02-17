@@ -42,8 +42,6 @@
   </ol>
 </details>
 
-#### Due to current working schedule, the toy-example and further release will be done by Chinese New Year 2024. ####
-
 ## Env setting and install
 * Create env
 ```

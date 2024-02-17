@@ -319,6 +319,7 @@ class ReplicaRGBDDataset(object):
         frame_data.calib = FrameIntrinsic(600., 600., 599.5, 339.5, 6553.5)
         frame_data.depth =  torch.from_numpy(self.depth[idx].astype(np.float32)).cuda().float() / 6553.5
         frame_data.rgb = torch.from_numpy(self.rgb[idx]).cuda().float() / 255.
+        frame_data.customs = [None] * 4 
         return frame_data
 
 
@@ -331,6 +332,7 @@ class ReplicaRGBDDataset(object):
         frame_data.calib = FrameIntrinsic(600., 600., 599.5, 339.5, 6553.5)
         frame_data.depth =  torch.from_numpy(self.depth[self.frame_id].astype(np.float32)).cuda().float() / 6553.5
         frame_data.rgb = torch.from_numpy(self.rgb[self.frame_id]).cuda().float() / 255.
+        frame_data.customs = [None] * 4
         self.frame_id += 1
         return frame_data
 
