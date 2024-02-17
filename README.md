@@ -87,7 +87,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:[this_folder]/lib
 
 ## Demo
 
-### 0. Fast use
+### 0. Quick try
 We provide a toy example to quick try our algorithm.
 You can either `python example/toy.py` or code as following:
 ```python
