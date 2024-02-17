@@ -43,6 +43,9 @@
 </details>
 
 ## Env setting and install
+<details>
+      <summary> Unfold this for installation </summary>
+      
 * Create env
 ```bash
 conda create -n uni python=3.8
@@ -83,6 +86,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:[this_folder]/lib
 
 ./build.sh && ./build_python.sh
 ```
+</details>
 </details>
 
 ## Demo
@@ -129,7 +133,7 @@ o3d.io.write_triangle_mesh('example/mesh.ply', map_mesh)
 You will get a mesh looks like this:
 
 <p align="">
-      <img src="assets/toy_result.png" align="" width="45%">
+      <img src="assets/toy_result.png" align="" width="89%">
 </p>
 
 
