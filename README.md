@@ -44,7 +44,7 @@
 
 ## Env setting and install
 * Create env
-```
+```bash
 conda create -n uni python=3.8
 conda activate uni
 
@@ -54,7 +54,7 @@ pip install ninja functorch==0.2.1 numba open3d opencv-python trimesh
 ```
 
 * install package
-```
+```bash
 git clone https://github.com/Jarrome/Uni-Fusion.git && cd Uni-Fusion
 # install uni package
 python setup.py install
@@ -63,7 +63,7 @@ python uni/ext/__init__.py
 ```
 
 * train a uni encoder from nothing in 1 second
-```
+```bash
 python uni/encoder/uni_encoder_v2.py
 ```
 
@@ -71,7 +71,7 @@ python uni/encoder/uni_encoder_v2.py
 <details>
 <summary> optionally, you can install the [ORB-SLAM2](https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2) that we use for tracking</summary>
   
-```
+```bash
 cd external
 git clone https://github.com/Jarrome/Uni-Fusion-use-ORB-SLAM2
 cd [this_folder]
@@ -87,10 +87,61 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:[this_folder]/lib
 
 ## Demo
 
+### 0. Fast use
+We provide a toy example to quick try our algorithm.
+You can either `python example/toy.py` or code as following:
+```python
+import torch
+import numpy as np
+
+from example.util import get_modules, get_example_data
+
+device = torch.device("cuda", index=0)
+
+# get mapper and tracker
+sm, cm, tracker, config = get_modules(device)
+
+# prepare data
+colors, depths, customs, calib, poses = get_example_data(device)
+
+for i in [0, 1]:
+    # preprocess rgbd to point cloud
+    frame_pose = tracker.track_camera(colors[i], depths[i], customs, calib, poses[i], scene = config.sequence_type)
+    # transform data
+    tracker_pc, tracker_normal, tracker_customs= tracker.last_processed_pc
+    opt_depth = frame_pose @ tracker_pc
+    opt_normal = frame_pose.rotation @ tracker_normal
+    color_pc, color, color_normal = tracker.last_colored_pc
+    color_pc = frame_pose @ color_pc
+    color_normal = frame_pose.rotation @ color_normal if color_normal is not None else None
+
+    # mapping pc
+    sm.integrate_keyframe(opt_depth, opt_normal)
+    cm.integrate_keyframe(color_pc, color, color_normal)
+
+# mesh extraction
+map_mesh = sm.extract_mesh(config.resolution, int(4e7), max_std=0.15, extract_async=False, interpolate=True)
+
+import open3d as o3d
+o3d.io.write_triangle_mesh('example/mesh.ply', map_mesh)
+
+```
+You will get a mesh looks like this:
+
+<p align="">
+      <img src="assets/toy_result.png" align="" width="45%">
+</p>
+
+
+
+
+---
+Then
+
 All demo can be run with ```python demo.py [config]```
 
 ### 1. Reconstruction Demo 
-```
+```bash
 # download replica data
 source scripts/download_replica.sh
 
@@ -117,7 +168,7 @@ python demo.py configs/replica/office0_w_slam.yaml
 
 [```office0_custom.yaml```](https://github.com/Jarrome/Uni-Fusion/blob/main/configs/replica/office0_custom.yaml) contains all mapping you need
 
-```
+```bash
 # if you need saliency
 pip install transparent-background
 # if you need style
@@ -132,7 +183,7 @@ python demo.py configs/replica/office0_custom.yaml
 
 ### 3. Open Vocabulary Scene Understanding Demo
 This Text-Visual CLIP is from [OpenSeg](https://github.com/tensorflow/tpu/tree/641c1ac6e26ed788327b973582cbfa297d7d31e7/models/official/detection/projects/openseg)
-```
+```bash
 # install requirements
 pip install tensorflow
 pip install git+https://github.com/openai/CLIP.git
@@ -156,7 +207,7 @@ We provide the script to extract RGB, D and IR from azure.mp4: [azure_process](h
 - [x] Upload the azure process for RGB,D,IR (Jan.8)
 - [x] Upload the seman. application (Jan.14)
 - [x] Upload the Custom context demo (Jan.14)
-- [ ] Toy example for fast essembling Uni-Fusion into custom project
+- [x] Toy example for fast essembling Uni-Fusion into custom project
 - [ ] Extraction from Latent Implicit Maps (LIMs)
 - [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
 
