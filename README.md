@@ -53,7 +53,7 @@ conda activate uni
 
 conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
 pip install torch-scatter torch-sparse torch-geometric -f https://data.pyg.org/whl/torch-1.12.0+cu113.html
-pip install ninja functorch==0.2.1 numba open3d opencv-python trimesh
+pip install ninja functorch==0.2.1 numba open3d opencv-python trimesh torchfile 
 ```
 
 * install package
@@ -213,12 +213,14 @@ render/ # here contains rendered RGB and Depth images
 
 ```bash
 # if you need saliency
-pip install transparent-background
+pip install transparent-background numba
 # if you need style
 cd external
 git clone https://github.com/Jarrome/PyTorch-Multi-Style-Transfer.git
-cd PyTorch-Style-Transfer/experiments
+mv PyTorch-Multi-Style-Transfer style_transfer
+cd style_transfer/experiments
 bash models/download_model.sh
+cd ../../../
 
 # run demo
 python demo.py configs/replica/office0_custom.yaml
@@ -233,10 +235,11 @@ python vis_LIM.py configs/replica/office0_custom.yaml
 This Text-Visual CLIP is from [OpenSeg](https://github.com/tensorflow/tpu/tree/641c1ac6e26ed788327b973582cbfa297d7d31e7/models/official/detection/projects/openseg)
 ```bash
 # install requirements
-pip install tensorflow
+pip install tensorflow==2.5.0
 pip install git+https://github.com/openai/CLIP.git
 
 # download openseg ckpt
+# can use `sudo snap install google-cloud-cli --classic` to install gsutil
 gsutil cp -r gs://cloud-tpu-checkpoints/detection/projects/openseg/colab/exported_model ./external/openseg/
 
 python demo.py configs/replica/office0_w_clip.yaml

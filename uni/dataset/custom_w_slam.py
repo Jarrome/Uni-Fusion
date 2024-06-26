@@ -149,7 +149,7 @@ class CustomAzurewSLAM(AzureRGBDIDataset):
         
         img = Image.fromarray(self.rgb[idx]).convert('RGB')
         frame_data.saliency = torch.from_numpy(
-                self.saliency_detector.process(img,type='map')
+                np.asarray(self.saliency_detector.process(img,type='map'))
                 ).cuda(0).float() /255. if self.has_saliency else None
 
 
@@ -257,7 +257,7 @@ class CustomReplicawSLAM(ReplicaRGBDDataset):
 
         frame_data.ir = None
         frame_data.saliency = torch.from_numpy(
-                self.saliency_detector.process(img,type='map').astype(np.float32)
+                np.asarray(self.saliency_detector.process(img,type='map')).astype(np.float32)
                 ).cuda(0).float() / 255. if self.has_saliency else None
 
         frame_data.style = torch.from_numpy(
@@ -398,7 +398,7 @@ class CustomScanNetwSLAM(ScanNetRGBDDataset):
 
         frame_data.ir = None
         frame_data.saliency = torch.from_numpy(
-                self.saliency_detector.process(img,type='map').astype(np.float32)
+                np.asarray(self.saliency_detector.process(img,type='map')).astype(np.float32)
                 ).cuda(0).float() / 255. if self.has_saliency else None
 
         frame_data.style = torch.from_numpy(
