@@ -142,7 +142,9 @@ You will get a mesh looks like this:
 ---
 Then
 
-All demo can be run with ```python demo.py [config]```
+* **All demo can be run with ```python demo.py [config]```**
+* **Mesh for color, style, infrad, semantic can be extracted with ```python vis_LIM.py [config]```**
+* **Rendering for RGB and Depth image can be extracted with ```python example/render_w_LIM.py [config] [optionally traj with GT poses]```**
 
 ### 1. Reconstruction Demo 
 ```bash
@@ -176,7 +178,14 @@ pred_traj.txt
 
 * *you can set ```vis=True``` for online vis (```False``` by default), which is more Di-Fusion. You can tap keyboard ',' for step and '.' for continue running with GUI*
 
-* *LIM extraction given result LIMs*
+* *LIM extraction for mesh*
+```
+python vis_LIM.py configs/replica/office0.yaml
+```
+
+will generate a `output/replica/office0/color_recons.ply`
+
+* *LIM rendering given result LIMs*
 ```
 # with gt pose
 python example/render_w_lim.py configs/replica/office0.yaml data/replica/office0/traj.txt
@@ -213,7 +222,12 @@ bash models/download_model.sh
 
 # run demo
 python demo.py configs/replica/office0_custom.yaml
+
+
+# LIM extraction of custom property shown on mesh
+python vis_LIM.py configs/replica/office0_custom.yaml
 ```
+
 
 ### 3. Open Vocabulary Scene Understanding Demo
 This Text-Visual CLIP is from [OpenSeg](https://github.com/tensorflow/tpu/tree/641c1ac6e26ed788327b973582cbfa297d7d31e7/models/official/detection/projects/openseg)
@@ -226,6 +240,9 @@ pip install git+https://github.com/openai/CLIP.git
 gsutil cp -r gs://cloud-tpu-checkpoints/detection/projects/openseg/colab/exported_model ./external/openseg/
 
 python demo.py configs/replica/office0_w_clip.yaml
+
+# LIM extraction of semantic shown on mesh
+python vis_LIM.py configs/replica/office0_w_clip.yaml
 ```
 
 ### 4. Self-captured data
@@ -244,7 +261,8 @@ The captured apartment data stores [here](https://robotik.informatik.uni-wuerzbu
 - [x] Upload the seman. application (Jan.14)
 - [x] Upload the Custom context demo (Jan.14)
 - [x] Toy example for fast essembling Uni-Fusion into custom project
-- [x] Extraction from Latent Implicit Maps (LIMs) (Jun.26) [Sry for the delay... Yijun just get some free time...]
+- [x] Extraction of Mesh w properties from Latent Implicit Maps (LIMs) (Jun.26) [Sry for the delay... Yijun just get some free time...]
+- [x] Rendering of RGB and Depth images from Latent Implicit Maps (LIMs) (Jun.26)
 - [ ] Our current new project [SceneFactory](https://jarrome.github.io/SceneFactory/) has a better option, I plan to replace this ORB-SLAM2 with that option after open-release that work.
 
 ---

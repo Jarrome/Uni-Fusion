@@ -83,6 +83,8 @@ if __name__ == '__main__':
 
     if use_gt:
         traj_path = sys.argv[2]
+    else:
+        traj_path = args.outdir+'pred_traj.txt'
 
 
 

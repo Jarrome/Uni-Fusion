@@ -1,14 +1,14 @@
 # Sequence parameters
 sequence_type: "custom_w_slam.CustomReplicawSLAM"
 sequence_kwargs:
-  path: "data/replica/ReplicaScenes/office0/results/"
+  path: "data/Replica/office0/results/"
   start_frame: 0
   end_frame: -1                                       # Run all frames
   #first_tq: [-1.2, 1.3, 1.0, 0.0, -1.0, 0.0, 0.0]     # Starting pose
   first_tq: [0, 0, 0.0, 0.0, -1.0, 0.0, 0.0] 
   load_gt: True
 
-  mesh_gt: "data/replica/ReplicaScenes/office0_mesh.ply"
+  mesh_gt: "data/Replica/office0_mesh.ply"
 
 outdir: "./output/custom/office0/"
 slam: False

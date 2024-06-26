@@ -1,13 +1,13 @@
 # Sequence parameters
 sequence_type: "replica.ReplicaRGBDDataset"
 sequence_kwargs:
-  path: "data/replica/office0/results/"
+  path: "data/Replica/office0/results/"
   start_frame: 0
   end_frame: -1                                       # Run all frames
   first_tq: [0, 0, 0.0, 0.0, -1.0, 0.0, 0.0] 
   load_gt: True # use gt traj or not
 
-  mesh_gt: "data/replica/office0_mesh.ply"
+  mesh_gt: "data/Replica/office0_mesh.ply"
 
 # Network parameters (network structure, etc. will be inherited from the training config)
 training_hypers: "ckpt/default/hyper.json"
