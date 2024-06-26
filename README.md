@@ -12,7 +12,7 @@
       <img src="assets/PLV.png" align="" width="37%">
 </p>
 
-*Universal encoder **no need data train** | Voxel grid for mapping*
+*Universal encoder **no need data train** | Picture on the right is voxel grid for mapping*
 
 *Therefore, it supports **any mapping**:*
 
@@ -156,9 +156,9 @@ python demo.py configs/replica/office0.yaml
 python demo.py configs/replica/office0_w_slam.yaml
 ```
 
-Then you can find result in `output/replica/office0` where was indicated in `[config]` file:  
-```bash
-ls output/replica/office0 
+Then you can find results in `output/replica/office0` where was specified in the `[config]` file:  
+```console
+$ ls output/replica/office0 
 
 surface.lim
 color.lim  
@@ -185,10 +185,10 @@ python example/render_w_lim.py configs/replica/office0.yaml data/replica/office0
 python example/render_w_lim.py configs/replica/office0_w_slam.yaml 
 ```
 
-This will creat a `render` folder under `output/replica/office0` where was indicated in `[config]` file: 
+This will creat a `render` folder under `output/replica/office0` where was specified in the `[config]` file: 
 
-```bash
-ls output/replica/office0 
+```console
+$ ls output/replica/office0 
 
 surface.lim
 color.lim  
@@ -230,7 +230,9 @@ python demo.py configs/replica/office0_w_clip.yaml
 
 ### 4. Self-captured data
 #### Azure capturing
-We provide the script to extract RGB, D and IR from azure.mp4: [azure_process](https://github.com/Jarrome/azure_process)
+We provide the script to extract RGB, D and IR from azure.mp4: [azure_process](https://github.com/Jarrome/azure_process).
+
+The captured apartment data stores [here](https://robotik.informatik.uni-wuerzburg.de/telematics/download/appartment2.tgz).
 
 ---
 ## TODO:
@@ -242,8 +244,8 @@ We provide the script to extract RGB, D and IR from azure.mp4: [azure_process](h
 - [x] Upload the seman. application (Jan.14)
 - [x] Upload the Custom context demo (Jan.14)
 - [x] Toy example for fast essembling Uni-Fusion into custom project
-- [ ] Extraction from Latent Implicit Maps (LIMs)
-- [ ] Our current new project has a better option, I plan to replace this ORB-SLAM2 with that option after complete that work.
+- [x] Extraction from Latent Implicit Maps (LIMs) (Jun.26) [Sry for the delay... Yijun just get some free time...]
+- [ ] Our current new project [SceneFactory](https://jarrome.github.io/SceneFactory/) has a better option, I plan to replace this ORB-SLAM2 with that option after open-release that work.
 
 ---
 ## Citation
