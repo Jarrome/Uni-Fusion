@@ -311,7 +311,7 @@ if __name__ == '__main__':
 
     # load latent model
     if hasattr(args, 'latent_mapping'):
-        from thirdparts.openseg import openseg_api
+        from external.openseg import openseg_api
         print('Loading lseg model...')
         f_im, f_tx, f_classify, lang_latent_length = openseg_api.get_api()
         print('Loaded!')

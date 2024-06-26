@@ -94,7 +94,7 @@ class CustomAzurewSLAM(AzureRGBDIDataset):
 
         # style
         if has_style:
-            from thirdparts.style_transfer.experiments import style_api
+            from external.style_transfer.experiments import style_api
             self.style_painting = style_api.get_api(style_idx)
 
         # latent
@@ -166,8 +166,8 @@ class CustomAzurewSLAM(AzureRGBDIDataset):
         return frame_data
 
 class CustomReplicawSLAM(ReplicaRGBDDataset):
-    def __init__(self, path, start_frame: int = 0, end_frame: int = -1, first_tq: list = None, load_gt: bool = False, train=True, mesh_gt = None, style_idx=1, has_style=True, has_ir=False, has_saliency=True, has_latent=False, f_im=None, slam=False):
-        load_file_gt = False
+    def __init__(self, path, start_frame: int = 0, end_frame: int = -1, first_tq: list = None, load_gt: bool = False, train=True, mesh_gt = None, style_idx=1, has_style=False, has_ir=False, has_saliency=False, has_latent=False, f_im=None, slam=False):
+        load_file_gt = load_gt #False
         super().__init__(path, start_frame, end_frame, first_tq, load_file_gt, train, mesh_gt)
         if slam:
             self.slam = SLAM(setting_file='./external/Uni-Fusion-use-ORB-SLAM2/Examples/RGB-D/replica.yaml')
@@ -203,7 +203,7 @@ class CustomReplicawSLAM(ReplicaRGBDDataset):
 
         # style
         if has_style:
-            from thirdparts.style_transfer.experiments import style_api
+            from external.style_transfer.experiments import style_api
             self.style_painting = style_api.get_api(style_idx)
 
         # latent
@@ -329,7 +329,7 @@ class CustomScanNetwSLAM(ScanNetRGBDDataset):
 
         # style
         if has_style:
-            from thirdparts.style_transfer.experiments import style_api
+            from external.style_transfer.experiments import style_api
             self.style_painting = style_api.get_api(style_idx)
 
         # latent

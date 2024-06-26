@@ -202,8 +202,8 @@ if __name__ == '__main__':
             #o3d.visualization.draw_geometries([mesh], mesh_show_back_face=True)
     if args.has_latent:
         args.latent_mapping = exp_util.dict_to_args(args.latent_mapping)
-        from thirdparts.openseg import openseg_api
-        print('Loading lseg model...')
+        from external.openseg import openseg_api
+        print('Loading openseg model...')
         f_im, f_tx, f_classify, lang_latent_length = openseg_api.get_api()
         print('Loaded!')
         del f_im
