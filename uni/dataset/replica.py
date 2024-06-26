@@ -8,7 +8,7 @@ from collections import defaultdict, namedtuple
 
 from threading import Thread, Lock
 from uni.dataset import *
-from utils import motion_util
+from uni.utils import motion_util
 from pyquaternion import Quaternion
 
 import open3d as o3d

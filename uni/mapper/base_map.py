@@ -70,23 +70,25 @@ class BaseMap:
     def save(self, path):
         if not isinstance(path, Path):
             path = Path(path)
-
         indexer_key = torch.where(self.indexer>-1)[0]
-        indexer_value = self.indexer[indexer_key].copy()
+        indexer_value = self.indexer[indexer_key].clone()
         self.cold_vars['indexer_key'] = indexer_key
         self.cold_vars['indexer_value'] = indexer_value
+
+        indexer = self.cold_vars['indexer']
         del self.cold_vars['indexer']
 
         with path.open('wb') as f:
             torch.save(self.cold_vars, f)
+
+        self.cold_vars['indexer'] = indexer
 
     def load(self, path):
         if not isinstance(path, Path):
             path = Path(path)
         with path.open('rb') as f:
             self.cold_vars = torch.load(f)
-
-        self.cold_vars['indexer'] = torch.ones(np.product(self.n_xyz), device=device, dtype=torch.long) * -1  
+        self.cold_vars['indexer'] = torch.ones(np.product(self.n_xyz), device=self.device, dtype=torch.long) * -1  
         self.cold_vars['indexer'][self.cold_vars['indexer_key']] = self.cold_vars['indexer_value']
 
 

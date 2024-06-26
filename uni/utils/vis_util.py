@@ -1,7 +1,7 @@
 import numpy as np
 import open3d as o3d
 import matplotlib.cm
-from utils.motion_util import Isometry
+from uni.utils.motion_util import Isometry
 
 
 def pointcloud(pc, color: np.ndarray = None, normal: np.ndarray = None):

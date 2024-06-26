@@ -155,6 +155,17 @@ python demo.py configs/replica/office0.yaml
 # with slam
 python demo.py configs/replica/office0_w_slam.yaml
 ```
+
+Then you can find result in `output/replica/office0` where was indicated in `[config]` file:  
+```bash
+ls output/replica/office0 
+
+surface.lim
+color.lim  
+final_recons.ply  
+pred_traj.txt  
+```
+
 * *in [scene_w_slam.yaml], we can choose 3 mode*
 
 |Usage| load_gt| slam|
@@ -165,7 +176,26 @@ python demo.py configs/replica/office0_w_slam.yaml
 
 * *you can set ```vis=True``` for online vis (```False``` by default), which is more Di-Fusion. You can tap keyboard ',' for step and '.' for continue running with GUI*
 
-* *We will later provide a LIM_extraction given result LIMs*
+* *LIM extraction given result LIMs*
+```
+# with gt pose
+python example/render_w_lim.py configs/replica/office0.yaml data/replica/office0/traj.txt
+
+# otherwise 
+python example/render_w_lim.py configs/replica/office0_w_slam.yaml 
+```
+
+This will creat a `render` folder under `output/replica/office0` where was indicated in `[config]` file: 
+
+```bash
+ls output/replica/office0 
+
+surface.lim
+color.lim  
+final_recons.ply  
+pred_traj.txt  
+render/ # here contains rendered RGB and Depth images
+```
 
 
 ### 2. Custom context Demo
